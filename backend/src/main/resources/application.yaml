@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: shophub
+   datasource:
+    url: jdbc:sqlserver://localhost:1433;databaseName=ShopHub;encrypt=true;trustServerCertificate=true
+    username: sa
+    password: YourStrong@Pass123
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+
+  flyway:
+    enabled: true
+
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
+server:
+  port: 8080
