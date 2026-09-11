@@ -4,9 +4,9 @@ services:
     container_name: sqlserver
     environment:
       ACCEPT_EULA: "Y"
-      MSSQL_SA_PASSWORD: "YourStrong@Pass123"
+      MSSQL_SA_PASSWORD: "ShopHub@12345"
     ports:
-      - "1433:1433"
+      - "1434:1433"
     volumes:
       - sqlserver-data:/var/opt/mssql
 

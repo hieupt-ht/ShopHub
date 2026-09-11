@@ -1,6 +1,6 @@
-package main.java.com.example.shophub.common;
+package com.example.shophub.common;
 import com.fasterxml.jackson.annotation.JsonInclude;
-@JsonInclude(JsonInclude.Include.NOT_NULL)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public record ApiResponse<T>(
     int code,
     String message,
