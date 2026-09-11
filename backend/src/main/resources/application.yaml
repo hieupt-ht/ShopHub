@@ -2,7 +2,7 @@ spring:
   application:
     name: shophub
   datasource:
-    url: jdbc:sqlserver://localhost:1433;databaseName=ShopHub;encrypt=true;trustServerCertificate=true
+    url: jdbc:sqlserver://localhost:1434;databaseName=ShopHub;encrypt=true;trustServerCertificate=true
     username: sa
     password: YourStrong@Pass123
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
