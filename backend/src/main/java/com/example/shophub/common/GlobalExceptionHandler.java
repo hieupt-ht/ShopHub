@@ -7,7 +7,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import main.java.com.example.shophub.common.ApiResponse;
+import com.example.shophub.common.ApiResponse;
 
 @ControllerAdvice 
 public class GlobalExceptionHandler {
