@@ -9,7 +9,7 @@ spring:
   jwt:
     secret: BWfT+l6s0J6AH+tPvIXKerooxpSHNcKvPCuhQgfOqww=
     access-token-expiration: 20000
-
+    refresh-token-expiration: 100000
   jpa:
     hibernate:
       ddl-auto: validate

@@ -3,6 +3,7 @@ package com.example.shophub.common;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -18,5 +19,13 @@ public class GlobalExceptionHandler {
             errors.put(e.getField(), e.getDefaultMessage());
         });
         return new ApiResponse<>(999, "List errors", errors);
+    }
+    @ExceptionHandler (BadCredentialsException.class)
+    public ApiResponse<String> handlerBadCredentialException(BadCredentialsException ex){
+        return new ApiResponse<>(401, "Invalid user or password", null);
+    }
+    @ExceptionHandler (InvalidRefreshTokenException.class)
+    public ApiResponse <String> handlerInvalidRefreshTokenException(InvalidRefreshTokenException ex){
+        return new ApiResponse<>(401, ex.getMessage(), null);
     }
 }
