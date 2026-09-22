@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.example.shophub.user.User;
+import com.example.shophub.user.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -17,7 +18,7 @@ implements UserDetailsService
     private final UserRepository userRepository;
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByName(username)
+        User user = userRepository.findByUsername(username)
         .orElseThrow(()-> new UsernameNotFoundException("user is not found"));
         return org.springframework.security.core.userdetails.User
         .withUsername(username)

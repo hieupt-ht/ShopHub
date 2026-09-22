@@ -5,6 +5,7 @@ import java.util.Date;
 
 import com.example.shophub.user.User;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -28,11 +29,12 @@ public class RefreshToken {
     @Id 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
+    @Column (name = "token")
     String refreshtoken;
     Instant expires_at;
     boolean revoked;
     Instant created_at;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn (name = "user_id")
-    private User users;
+    private User user;
 }

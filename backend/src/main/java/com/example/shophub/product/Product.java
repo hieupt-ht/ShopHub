@@ -32,8 +32,6 @@ public class Product {
     @Id 
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToMany (mappedBy = "product", fetch = FetchType.LAZY, orphanRemoval = true)
-    private List<CartItems> carts = new ArrayList<>();
 
     @OneToMany (mappedBy = "product", fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
     private List<Image> images = new ArrayList<>();

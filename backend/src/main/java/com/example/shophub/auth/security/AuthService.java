@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service 
 @RequiredArgsConstructor 
+
 public class AuthService {
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
@@ -29,7 +30,7 @@ public class AuthService {
         // tạo accestoken
         String accessToken = jwtService.generateAccessToken(userDetails);
         // lấy user thông qua userdetails
-        User user = userRepository.findByName(userDetails.getUsername()).orElseThrow();
+        User user = userRepository.findByUsername(userDetails.getUsername()).orElseThrow();
         // tạo refreshtoken
         RefreshToken refreshToken = refreshTokenService.createRefreshToken(user);
         return new AuthResponse(accessToken, refreshToken.getRefreshtoken());

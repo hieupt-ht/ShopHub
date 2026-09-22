@@ -12,8 +12,10 @@ import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor 
 public class JwtService {
     @Value("${jwt.secret}")
     private String secret;
@@ -44,7 +46,7 @@ public class JwtService {
     public boolean isTokenValid(String token, UserDetails userDetails){
         try{
             String username = extractUsername(token);
-            return username.equals(userDetails.getUsername() && !isTokenExpiration(String token));
+            return username.equals(userDetails.getUsername()) && (!isTokenExpiration(token));
         }catch(Exception e){
             return false;
         }

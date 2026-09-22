@@ -1,14 +1,12 @@
-package com.example.shophub.auth;
+package com.example.shophub.refreshtoken;
 
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.example.shophub.refreshtoken.RefreshToken;
-
 @Repository 
 public interface RefreshTokenRepository extends JpaRepository<RefreshToken, Long>{
-    Optional<RefreshToken> findByToken(String token);
-    void deteleByToken(String token);
+    Optional<RefreshToken> findByRefreshtoken(String token);
+    void deleteByRefreshtoken(String token);
 }

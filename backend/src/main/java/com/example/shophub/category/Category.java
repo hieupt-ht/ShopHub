@@ -32,13 +32,13 @@ public class Category {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @OneToMany (mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany (mappedBy = "category", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Product> products = new ArrayList<>();
 
     private String name;
     private String slug;
     private String description;
     private Date created_at;
-    private Date upadated_at;
+    private Date updated_at;
 
 }
