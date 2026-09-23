@@ -41,7 +41,9 @@ public class SecurityConfig {
         http.csrf(csrf->csrf.disable())
         .sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .authorizeHttpRequests(auth->
-            auth.requestMatchers("/api/v1/auth/login").permitAll() // login không cần authenticate
+            auth.requestMatchers("/api/v1/product/**").permitAll()
+            .requestMatchers("/api/v1/user/**").permitAll()
+            .requestMatchers("/api/v1/auth/login").permitAll() // login không cần authenticate
             .requestMatchers("/api/v1/admin").hasRole("ADMIN")
             .anyRequest().authenticated()
         )

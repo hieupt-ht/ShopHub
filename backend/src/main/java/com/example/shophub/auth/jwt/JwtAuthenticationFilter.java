@@ -26,9 +26,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 			throws ServletException, IOException {
                 // lấy authorization header
                 String authHeader = request.getHeader("Authorization");
-                // nếu không có beartoken cho request đi đến filter tiếp theo
-                if(authHeader == null || !authHeader.startsWith("BearToken")){
+                // Nếu không có Bearer token, cho request đi tiếp.
+                if (authHeader == null || !authHeader.startsWith("Bearer")) {
                     filterChain.doFilter(request, response);
+                    return;
                 }
                 // lấy ra token
                 String accessToken = authHeader.substring(7);
