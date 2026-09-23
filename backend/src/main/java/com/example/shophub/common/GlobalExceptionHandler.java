@@ -28,4 +28,8 @@ public class GlobalExceptionHandler {
     public ApiResponse <String> handlerInvalidRefreshTokenException(InvalidRefreshTokenException ex){
         return new ApiResponse<>(401, ex.getMessage(), null);
     }
+    @ExceptionHandler (ObjectIsNotFoundException.class)
+    public ApiResponse <String> handleObjectIsNotFoundException(ObjectIsNotFoundException ex){
+        return new ApiResponse<>(404, ex.getMessage(), null);
+    }
 }

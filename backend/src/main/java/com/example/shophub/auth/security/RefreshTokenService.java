@@ -11,7 +11,7 @@ import com.example.shophub.refreshtoken.RefreshToken;
 import com.example.shophub.refreshtoken.RefreshTokenRepository;
 import com.example.shophub.user.User;
 import com.example.shophub.auth.CustomUserDetailService;
-import com.example.shophub.auth.security.JwtService;
+import com.example.shophub.auth.jwt.*;
 
 import lombok.RequiredArgsConstructor;
 

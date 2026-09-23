@@ -1,4 +1,4 @@
-package com.example.shophub.auth.security;
+package com.example.shophub.auth.jwt;
 
 import java.util.Date;
 

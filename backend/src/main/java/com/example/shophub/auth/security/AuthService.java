@@ -7,14 +7,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import com.example.shophub.auth.record.AuthResponse;
 import com.example.shophub.auth.record.LoginRequest;
-import com.example.shophub.auth.security.*;
+import com.example.shophub.auth.jwt.*;
 import com.example.shophub.refreshtoken.*;
 import com.example.shophub.user.*;
 import lombok.RequiredArgsConstructor;
 
 @Service 
 @RequiredArgsConstructor 
-
 public class AuthService {
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
