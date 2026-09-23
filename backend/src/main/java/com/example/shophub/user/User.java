@@ -1,6 +1,7 @@
 package com.example.shophub.user;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,8 +42,8 @@ public class User {
     private String fullname;
     private String phone;
     private String role;
-    private Date created_at;
-    private Date updated_at;
+    private LocalDateTime created_at;
+    private LocalDateTime updated_at;
     @OneToOne (mappedBy = "user", fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
     private Cart cart;
 

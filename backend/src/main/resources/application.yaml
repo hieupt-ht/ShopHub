@@ -4,12 +4,8 @@ spring:
   datasource:
     url: jdbc:sqlserver://localhost:1434;databaseName=ShopHub;encrypt=true;trustServerCertificate=true
     username: sa
-    password: YourStrong@Pass123
+    password: ShopHub@12345
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
-  jwt:
-    secret: BWfT+l6s0J6AH+tPvIXKerooxpSHNcKvPCuhQgfOqww=
-    access-token-expiration: 20000
-
   jpa:
     hibernate:
       ddl-auto: validate
@@ -22,6 +18,10 @@ spring:
     redis:
       host: localhost
       port: 6379
+jwt:
+  secret: BWfT+l6s0J6AH+tPvIXKerooxpSHNcKvPCuhQgfOqww=
+  access-token-expiration: 20000
+  refresh-token-expiration: 100000
 
 server:
   port: 8080
