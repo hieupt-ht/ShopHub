@@ -34,4 +34,7 @@ public class AuthService {
         RefreshToken refreshToken = refreshTokenService.createRefreshToken(user);
         return new AuthResponse(accessToken, refreshToken.getRefreshtoken());
     }
+    public AuthResponse refresh(String refresh){
+        return refreshTokenService.refreshToken(refresh);
+    }
 }
