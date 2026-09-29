@@ -6,7 +6,7 @@ export const Footer = () => {
         <div>
             <div className='flex justify-center'>
                 <div>
-                    logo
+                    
                 </div>
                 <h3 className='text-[#FFFFFF]'>ShopHub Việt Nam</h3>
             </div>
