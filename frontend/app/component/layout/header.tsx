@@ -3,6 +3,7 @@ import React, { use } from 'react'
 import LogoShop from '../ui/LogoShop'
 import { NavHeader } from '../ui/NavHeader'
 import Search from '../ui/Search';
+import Cart from '../ui/Cart';
 export const Header = () => {
   return (
     <div>
@@ -26,9 +27,15 @@ export const Header = () => {
                 <div>
                     <NavHeader />
                 </div>
-                <div>
-                    <div>
+                <div className='flex items-center'>
+                    <div className=''>
                         <Search/>
+                    </div>
+                    <div>
+                        <Cart></Cart>
+                    </div>
+                    <div>
+                        
                     </div>
                 </div>
             </div>

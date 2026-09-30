@@ -3,13 +3,13 @@ import api from "../api/axious"
 
 export const AuthService = {
     async login(loginData : LoginRequest){
-        const response = await api.post<LoginResponse>(
+        const response = await api.post(
             "/v1/auth/login",
             loginData
         );
         const {accesstoken, refreshtoken} = response.data.result;
         tokenStore.setTokens(accesstoken, refreshtoken);
-        return response.data;
+        return response.data.result as LoginResponse;
     },
     async refresh(){
         const refreshToken = tokenStore.getRefreshToken();
