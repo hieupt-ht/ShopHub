@@ -1,7 +1,8 @@
 "use client";
 import React, { use } from 'react'
-import LogoShop from '../ui/logoShop'
-import { NavHeader } from '../ui/navHeader'
+import LogoShop from '../ui/LogoShop'
+import { NavHeader } from '../ui/NavHeader'
+import Search from '../ui/Search';
 export const Header = () => {
   return (
     <div>
@@ -24,6 +25,11 @@ export const Header = () => {
                 </div>
                 <div>
                     <NavHeader />
+                </div>
+                <div>
+                    <div>
+                        <Search/>
+                    </div>
                 </div>
             </div>
         </div>
