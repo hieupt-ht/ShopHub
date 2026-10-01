@@ -110,6 +110,12 @@
 			<version>0.12.6</version>
 			<scope>runtime</scope>
 		</dependency>
+				<!-- MapStruct -->
+		<dependency>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct</artifactId>
+			<version>1.6.3</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -118,6 +124,21 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<!-- mapp struct -->
+			 <plugin>
+            	<groupId>org.apache.maven.plugins</groupId>
+           		<artifactId>maven-compiler-plugin</artifactId>
+            	<version>3.13.0</version>
+				<configuration>
+					<annotationProcessorPaths>
+						<path>
+							<groupId>org.mapstruct</groupId>
+							<artifactId>mapstruct-processor</artifactId>
+							<version>1.6.3</version>
+						</path>
+					</annotationProcessorPaths>
+				</configuration>
+        	</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
