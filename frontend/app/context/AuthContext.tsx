@@ -3,16 +3,16 @@ import { createContext, ReactNode, useContext, useEffect, useState } from "react
 import { AuthService } from "../service/auth/AuthService";
 import { error } from "console";
 import { tokenStore } from "../lib/tokenStore";
+import { UserService } from "../service/user/UserService";
 interface AuthContexType{
-    user: User | null,
+    user: UserResponse | null,
     isAuthenticated: boolean,
-    login: (data: LoginRequest)=> Promise<LoginResponse>
     logout: ()=> void
 }
 const AuthContext = createContext<AuthContexType | null>(null);
 
 export default function AuthProvider({children} : {children : ReactNode}) {
-  const [user,setUser] = useState<User | null>(null);
+  const [user,setUser] = useState<UserResponse | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   useEffect (()=>{
     const accesstoken = tokenStore.getAccessToken();
@@ -20,20 +20,13 @@ export default function AuthProvider({children} : {children : ReactNode}) {
       return;
     }
     try {
-      
+      const currentUser = await UserService.getCurrentUser();
+      setUser(currentUser);
+      setIsAuthenticated(true);
     } catch (error) {
       
     }
   }, [])
-  const login =  async (data: LoginRequest)=>{
-    try{
-      const response = await AuthService.login(data);
-      setUser(response.result.user);
-    }catch(error){
-      console.log ("user is not found !");
-      setUser(null);
-    }
-  }
   const logout = ()=>{
     AuthService.logout();
     setUser(null);
@@ -45,7 +38,6 @@ export default function AuthProvider({children} : {children : ReactNode}) {
       {
         user,
         isAuthenticated: isAuthenticated,
-        login,
         logout
       }
     }
