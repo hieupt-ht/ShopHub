@@ -4,6 +4,8 @@ import com.example.shophub.auth.record.LoginRequest;
 import com.example.shophub.auth.record.AuthResponse;
 import com.example.shophub.common.*;
 import com.example.shophub.auth.security.*;
+
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,5 +21,9 @@ public class AuthController {
     @PostMapping ("/login")
     public ApiResponse login(@RequestBody LoginRequest request){
         return new ApiResponse<AuthResponse>(400, "login success", authService.login(request));
+    }
+    @GetMapping ("/refresh-token")
+    public ApiResponse refresh(@RequestBody String request){
+        return new ApiResponse<>(400, "refresh success", authService.refresh(request));
     }
 }

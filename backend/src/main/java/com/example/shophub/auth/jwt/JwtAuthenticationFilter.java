@@ -45,7 +45,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                         // đưa authentication vào securitycontex quản lý
                         SecurityContextHolder.
                         getContext().
-                        setAuthentication(authentication);
+                        setAuthentication(authentication); 
                     }
                 } catch (Exception e) {
                 }
