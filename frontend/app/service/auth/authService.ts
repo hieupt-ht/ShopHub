@@ -1,8 +1,9 @@
 import { tokenStore } from "@/app/lib/tokenStore";
 import api from "../api/axious"
+import { LoginRequest } from "@/app/type/auth/loginRequest";
 
 export const AuthService = {
-    async login(loginData : LoginRequest){
+    async login(loginData: LoginRequest){
         const response = await api.post(
             "/v1/auth/login",
             loginData
