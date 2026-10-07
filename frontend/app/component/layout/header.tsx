@@ -4,6 +4,7 @@ import LogoShop from '../ui/LogoShop'
 import { NavHeader } from '../ui/NavHeader'
 import Search from '../ui/Search';
 import Cart from '../ui/Cart';
+import Account from '../ui/Account';
 export const Header = () => {
   return (
     <div>
@@ -24,18 +25,18 @@ export const Header = () => {
                         <p className='text-[#64748B] text-[16px]'>MVP EDITION</p>
                     </div>
                 </div>
-                <div>
+                <div className='px-[10px]'>
                     <NavHeader />
                 </div>
-                <div className='flex items-center'>
+                <div className='flex justify-between items-center'>
                     <div className=''>
                         <Search/>
                     </div>
-                    <div>
+                    <div className='px-[10px]'>
                         <Cart></Cart>
                     </div>
-                    <div>
-                        
+                    <div className='px-[10px]'>
+                        <Account></Account>
                     </div>
                 </div>
             </div>

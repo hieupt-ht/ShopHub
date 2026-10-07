@@ -15,17 +15,22 @@ export default function AuthProvider({children} : {children : ReactNode}) {
   const [user,setUser] = useState<UserResponse | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   useEffect (()=>{
-    const accesstoken = tokenStore.getAccessToken();
-    if(!accesstoken){
-      return;
+    const loadCurrentUser = async ()=>{
+      const accesstoken = tokenStore.getAccessToken();
+      if(!accesstoken){
+        return;
+      }
+      try {
+        const currentUser = await UserService.getCurrentUser();
+        if(currentUser){
+          setUser(currentUser);
+          setIsAuthenticated(true);
+        }
+      } catch (error) {
+        console.log("error");
+      }
     }
-    try {
-      const currentUser = await UserService.getCurrentUser();
-      setUser(currentUser);
-      setIsAuthenticated(true);
-    } catch (error) {
-      
-    }
+    loadCurrentUser();
   }, [])
   const logout = ()=>{
     AuthService.logout();

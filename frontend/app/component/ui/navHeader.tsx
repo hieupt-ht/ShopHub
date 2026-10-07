@@ -24,7 +24,7 @@ export const NavHeader = () => {
             {itemNav.map((item)=>{
                     const isActive = item.href === pathName;
                     return (
-                        <div>
+                        <div key={item.href}>
                             <Link key={item.href} href={item.href}
                                 className={`text-[16px] px-[10px] cursor-pointer ${isActive ? 'text-[#0068FF] border-b-[2px] border-[#0068FF]' : 'text-[#334155] hover:text-[#0068FF]'}`}>
                                 {item.label}
