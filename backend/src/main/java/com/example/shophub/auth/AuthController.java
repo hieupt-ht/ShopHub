@@ -20,7 +20,7 @@ public class AuthController {
     private final AuthService authService;
     @PostMapping ("/login")
     public ApiResponse login(@RequestBody LoginRequest request){
-        return new ApiResponse<AuthResponse>(400, "login success", authService.login(request));
+        return new ApiResponse<AuthResponse>(200, "login success", authService.login(request));
     }
     @GetMapping ("/refresh-token")
     public ApiResponse refresh(@RequestBody String request){

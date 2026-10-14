@@ -15,8 +15,8 @@ export default function Login() {
         try{
             const response = await AuthService.login(loginRequest);
             console.log("data login: ", response.result);
-        }catch{
-
+        }catch(error){
+          console.log("login faild");
         }
     }
   return (
