@@ -1,4 +1,5 @@
 import { tokenStore } from "@/app/lib/tokenStore";
+import { LoginResponse } from "@/app/type/auth/loginResponse";
 import axios, { AxiosError, InternalAxiosRequestConfig } from "axios";
 
 const api = axios.create({
@@ -28,7 +29,7 @@ api.interceptors.response.use(
                 _retry?: boolean;
             };
 
-        if (error.status !== 401 || !originalRequest) {
+        if (error.response?.status !== 401 || !originalRequest) {
             return Promise.reject(error);
         }
 
@@ -40,12 +41,18 @@ api.interceptors.response.use(
 
         originalRequest._retry = true;
         try {
-            const refresh = tokenStore.getRefreshToken();
-            const response = await api.post<LoginResponse>("/refresh", {
-                refresh,
-            });
-            const { accesstoken, refreshtoken } = response.data.result;
-            tokenStore.setTokens(accesstoken, refreshtoken);
+            const refreshToken = tokenStore.getRefreshToken();
+            if (!refreshToken) {
+                throw new Error("Refresh token is missing");
+            }
+            const response = await axios.post<{ result: LoginResponse }>(
+                "/v1/refresh",
+                { refreshtoken: refreshToken },
+                { headers: { "Content-Type": "application/json" } },
+            );
+            const { accesstoken, refreshToken: newRefreshToken } = response.data.result;
+            tokenStore.setTokens(accesstoken, newRefreshToken);
+            originalRequest.headers = originalRequest.headers ?? {};
             originalRequest.headers.Authorization = `Bearer ${accesstoken}`;
             return api(originalRequest);
         } catch (refreshError) {

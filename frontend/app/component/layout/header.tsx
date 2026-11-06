@@ -5,6 +5,7 @@ import { NavHeader } from '../ui/NavHeader'
 import Search from '../ui/Search';
 import Cart from '../ui/Cart';
 import Account from '../ui/Account';
+import { useAuth } from '@/app/context/AuthContext';
 export const Header = () => {
   return (
     <div>

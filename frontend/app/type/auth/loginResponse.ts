@@ -3,13 +3,8 @@ interface User{
     username: string;
     fullname: string;
 }
-interface LoginResponse{
-    code: number,
-    message: string,
-    result:
-        {
-            accesstoken: string,
-            refreshtoken: string
-            user: User
-        }
+export interface LoginResponse {
+    accesstoken: string,
+    refreshToken: string,
+    user?: User
 }

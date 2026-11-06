@@ -6,12 +6,13 @@ interface accountProps{
     
 }
 export default function Account() {
-  const {user} = useAuth();
-
+  const { user, isLoading } = useAuth();
   return (
     <>
       {
-        !user ? (
+        isLoading ? (
+          <span aria-live="polite">Loading...</span>
+        ) : !user ? (
           <div>
             <Link href={"/login"}>Login</Link>
           </div>

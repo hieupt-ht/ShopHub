@@ -1,60 +1,68 @@
 "use client";
-import { createContext, ReactNode, useContext, useEffect, useState } from "react"
+import { createContext, type ReactNode, useCallback, useContext, useEffect, useState } from "react";
 import { AuthService } from "../service/auth/AuthService";
-import { error } from "console";
 import { tokenStore } from "../lib/tokenStore";
 import { UserService } from "../service/user/UserService";
-interface AuthContexType{
-    user: UserResponse | null,
-    isAuthenticated: boolean,
-    logout: ()=> void
-}
-const AuthContext = createContext<AuthContexType | null>(null);
+import type { UserResponse } from "../type/user/UserResponse";
 
-export default function AuthProvider({children} : {children : ReactNode}) {
-  const [user,setUser] = useState<UserResponse | null>(null);
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
-  useEffect (()=>{
-    const loadCurrentUser = async ()=>{
-      const accesstoken = tokenStore.getAccessToken();
-      if(!accesstoken){
-        return;
+interface AuthContextType {
+    user: UserResponse | null;
+    isAuthenticated: boolean;
+    isLoading: boolean;
+    refreshUser: () => Promise<UserResponse | null>;
+    logout: () => void;
+}
+const AuthContext = createContext<AuthContextType | null>(null);
+
+export default function AuthProvider({ children }: { children: ReactNode }) {
+  const [user, setUser] = useState<UserResponse | null>(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const refreshUser = useCallback(async (): Promise<UserResponse | null> => {
+    setIsLoading(true);
+    try {
+      if (!tokenStore.getAccessToken()) {
+        setUser(null);
+        setIsAuthenticated(false);
+        return null;
       }
-      try {
-        const currentUser = await UserService.getCurrentUser();
-        if(currentUser){
-          setUser(currentUser);
-          setIsAuthenticated(true);
-        }
-      } catch (error) {
-        console.log("error");
-      }
+
+      const currentUser = await UserService.getCurrentUser();
+      setUser(currentUser);
+      setIsAuthenticated(true);
+      return currentUser;
+    } catch (caughtError) {
+      console.error("Could not load the current user:", caughtError);
+      setUser(null);
+      setIsAuthenticated(false);
+      return null;
+    } finally {
+      setIsLoading(false);
     }
-    loadCurrentUser();
-  }, [])
-  const logout = ()=>{
+  }, []);
+
+  useEffect(() => {
+    void refreshUser();
+  }, [refreshUser]);
+
+  const logout = () => {
     AuthService.logout();
     setUser(null);
     setIsAuthenticated(false);
-  }
+  };
+
   return (
-    <AuthContext.Provider
-    value={
-      {
-        user,
-        isAuthenticated: isAuthenticated,
-        logout
-      }
-    }
-    >
+    <AuthContext.Provider value={{ user, isAuthenticated, isLoading, refreshUser, logout }}>
       {children}
     </AuthContext.Provider>
   )
 }
-export function useAuth(){
+
+export function useAuth() {
   const context = useContext(AuthContext);
-  if(!context){
-    throw new Error ("useAuth is not found !");
+  if (!context) {
+    throw new Error("useAuth must be used inside AuthProvider.");
   }
   return context;
 }

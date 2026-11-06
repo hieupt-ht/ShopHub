@@ -52,6 +52,7 @@ public class SecurityConfig {
             auth.requestMatchers(org.springframework.http.HttpMethod.OPTIONS, "/**").permitAll()
             .requestMatchers("/api/v1/product/**").permitAll()
             .requestMatchers("/api/v1/auth/login").permitAll() // login không cần authenticate
+            .requestMatchers("/api/v1/refresh").permitAll()
             .requestMatchers("/api/v1/admin").hasRole("ADMIN")
             .anyRequest().authenticated()
         )

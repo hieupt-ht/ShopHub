@@ -29,7 +29,7 @@ public class Category {
     private Long id;
     
     @OneToMany (mappedBy = "category", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Product> products =ructor tường minh với đầy đủ các field new ArrayList<>();
+    private List<Product> products = new ArrayList<>();
 
     private String name;
     private String slug;
